@@ -7,9 +7,8 @@
         <div class="logo-par">
             <a class="s-item" v-for="social_info in AllSocials" :key="social_info.UniqueName" 
                               :style="social_info.Logo?{backgroundImage:`url(${social_info.Logo})`}:{}"
-                              :class="{'has-logo': !!social_info.Logo}"
-                              :href="social_info.Link">
-                {{social_info.Text||""}}
+                              :class="{'has-logo': !!social_info.Logo || !!social_info.IsSVG}"
+                              :href="social_info.Link" v-html="social_info.IsSVG||social_info.Text||''">
             </a>
         </div>
     </div>
@@ -23,7 +22,7 @@ export default {
             validator: val => {
                 return !val.some(v=>{
                     v = Object.keys(v);
-                    return  (!v.includes("Text") && !v.includes("Logo")) || !v.includes("Link") || !v.includes("UniqueName");
+                    return  (!v.includes("Text") && !v.includes("Logo") && !v.includes("IsSVG")) || !v.includes("Link") || !v.includes("UniqueName");
                 });
             }
         }
@@ -50,8 +49,6 @@ export default {
     }
     .line{
         position: absolute;
-        /* top: 50%;
-        transform: translateY(-50%); */
         height: 1px;
         display: inline-block;
         width: 58px;
@@ -81,10 +78,21 @@ export default {
         text-align: center;
         line-height: 1;
         text-decoration: none;
+        position: relative;
     }
     .has-logo{
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
+    }
+    .s-item >>> svg {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .s-item /deep/ svg path{
+        fill: var(--app-def-color);
     }
 </style>

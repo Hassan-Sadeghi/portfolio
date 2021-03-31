@@ -8,7 +8,7 @@
     </div>
     <div>
       <a href="javascript:;">&nbsp;f</a>
-      <a class="twitter" href="javascript:;" :style="{'background-image': `url(${require('@/assets/img/twitter-w.png')})`}">-</a>
+      <a class="twitter" href="javascript:;" v-html="TwiterLogo_SVG"></a>
       <a href="javascript:;">in</a>
     </div>
   </div>
@@ -19,7 +19,14 @@ import VueRouter from 'vue-router';
 
 import { HeaderRouters as HeaderMenuRoutes } from '../routes';
 
+import {AppInfo} from '../constants'
+
 export default {
+  data(){
+    return {
+      TwiterLogo_SVG: AppInfo.SVGLogo.Twitter
+    };
+  },
   methods: {
     DoOnClick(to){
       this.$router.push(to); 
@@ -34,7 +41,7 @@ export default {
 <style scoped>
 .footer-part{
   width: 100%;
-  background-color: #754ef9;
+  background-color: var(--app-def-color);
   color: white;
   position: relative;
   display: flex;
@@ -76,9 +83,15 @@ export default {
   color: #ffffff;
 }
 .twitter{
-  background-size: 25px;
-  background-repeat: no-repeat;
-  background-position: left+2px center;
-  color: transparent !important;
+  position: relative;
+}
+.twitter >>> svg {
+    height: 87%;
+    position: absolute;
+    top: 7px;
+    left: -5px;
+}
+.twitter /deep/ svg path{
+    fill: #fff;
 }
 </style>

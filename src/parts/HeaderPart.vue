@@ -22,7 +22,7 @@
         <div>
           <Social :AllSocials="[
             {UniqueName: 'f', Text: 'f', Link: 'javascript:;'},
-            {UniqueName: 't', Logo: require('@/assets/img/twitter.png'), Link: 'javascript:void();'},//فولدر ایمیج هم بهتر بود  پوشه بندی بشه که فعلاً انجامش ندادم
+            {UniqueName: 't', IsSVG: TwitterLogo, Link: 'javascript:void();'},//فولدر ایمیج هم بهتر بود  پوشه بندی بشه که فعلاً انجامش ندادم
             {UniqueName: 'i', Text: 'in', Link: '#'}
           ]"></Social>
         </div>
@@ -35,6 +35,8 @@
 import Avatar from './components/HeaderPart/Avatar'
 import Social from './components/HeaderPart/Social'
 import MainMenu from './components/HeaderPart/MainMenu'
+
+import {AppInfo} from '../constants'
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -60,7 +62,8 @@ export default {
           To: "DownloadCV",
           IsSelected: true 
         }
-      ]
+      ],
+      TwitterLogo: AppInfo.SVGLogo.Twitter
     };
   },
   components: {
